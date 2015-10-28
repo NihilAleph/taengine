@@ -7,6 +7,7 @@ namespace taengine {
 
 // Public flags to create the window
 enum WindowFlag { INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4 };
+
 class Window
 {
     public:

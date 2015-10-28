@@ -40,7 +40,17 @@
 			<Add option="-std=c++11" />
 			<Add directory="../deps/x86/include" />
 		</Compiler>
+		<Linker>
+			<Add library="mingw32" />
+			<Add library="SDL2main" />
+			<Add library="SDL2" />
+			<Add directory="../deps/x86/lib" />
+		</Linker>
+		<Unit filename="include/InputManager.h" />
+		<Unit filename="include/Shader.h" />
 		<Unit filename="include/Window.h" />
+		<Unit filename="src/InputManager.cpp" />
+		<Unit filename="src/Shader.cpp" />
 		<Unit filename="src/Window.cpp" />
 		<Extensions>
 			<code_completion />
