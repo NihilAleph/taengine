@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <string>
+#include "Transform.h"
 
 namespace taengine {
 
@@ -15,6 +16,7 @@ class Shader
         // Updates uniforms of the shader. Must be overridden if Shader demands other uniforms
         // This shader only use the uniform MVP for transform
         // virtual void updateUniforms(const Transform& transform, const Camera& camera);
+        virtual void updateUniforms(const Transform& transform);
 
         // Draw vetices. Must be overridden if shader demands other attributes
         // virtual void draw();

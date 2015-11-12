@@ -80,4 +80,11 @@ bool InputManager::wasKeyDown(unsigned int keyID)
         return it->second;
     else return false;
 }
+
+void InputManager::setMouseCoords(float x, float y)
+{
+    m_mouseCoords.x = x;
+    m_mouseCoords.y = y;
+}
+
 }

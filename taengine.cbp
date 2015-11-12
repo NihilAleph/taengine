@@ -46,11 +46,20 @@
 			<Add library="SDL2" />
 			<Add directory="../deps/x86/lib" />
 		</Linker>
+		<Unit filename="include/Camera.h" />
+		<Unit filename="include/IMainGame.h" />
 		<Unit filename="include/InputManager.h" />
+		<Unit filename="include/Mesh.h" />
 		<Unit filename="include/Shader.h" />
+		<Unit filename="include/Time.h" />
+		<Unit filename="include/Transform.h" />
 		<Unit filename="include/Window.h" />
+		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/IMainGame.cpp" />
 		<Unit filename="src/InputManager.cpp" />
+		<Unit filename="src/Mesh.cpp" />
 		<Unit filename="src/Shader.cpp" />
+		<Unit filename="src/Time.cpp" />
 		<Unit filename="src/Window.cpp" />
 		<Extensions>
 			<code_completion />

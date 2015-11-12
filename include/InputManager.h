@@ -24,6 +24,10 @@ class InputManager
         bool isKeyPressed(unsigned int keyID);
         bool isKeyReleased(unsigned int keyID);
 
+        // Set mouse coordinates
+        void setMouseCoords(float x, float y);
+        glm::vec2 getMouseCoords() const { return m_mouseCoords; }
+
     protected:
     private:
         // Hash map of pressed keys

@@ -37,7 +37,7 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
             glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &infoLogLength);
 
             // Get Info Log
-            std::vector<char> infoLog;
+            std::vector<char> infoLog(infoLogLength);
             glGetProgramInfoLog(m_programID, infoLogLength, NULL, &infoLog[0]);
 
             // Print info log
@@ -105,7 +105,7 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
             glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
 
             // Get Info Log
-            std::vector<char> infoLog;
+            std::vector<char> infoLog(infoLogLength);
             glGetShaderInfoLog(shaderID, infoLogLength, NULL, &infoLog[0]);
 
             // Print info log
@@ -134,17 +134,19 @@ void Shader::bindAttributes()
 }
 
 //void Shader::updateUniforms(const Transform& transform, const Camera& camera)
-//{
-//    // Get transform and camera matrix
-//    glm::mat4 MVP = transform.getMVP(camera);
-//
-//    // Get uniform location
-//    GLuint mvp = glGetUniformLocation(m_programID, "MVP");
-//
-//    // Update uniform value
-//    glUniformMatrix4fv(mvp, 1, GL_FALSE, &MVP[0][0]);
-//
-//}
+void Shader::updateUniforms(const Transform& transform)
+{
+    // Get transform and camera matrix
+    //glm::mat4 MVP = transform.getMVP(camera);
+    glm::mat4 model = transform.getModel();
+
+    // Get uniform location
+    GLuint mvp = glGetUniformLocation(m_programID, "MVP");
+
+    // Update uniform value
+    glUniformMatrix4fv(mvp, 1, GL_FALSE, &model[0][0]);
+
+}
 
 void Shader::bind()
 {

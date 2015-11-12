@@ -3,6 +3,14 @@
 
 #include <string>
 #include <SDL2\SDL.h>
+
+/************************************************
+*
+*   This class manages the creating, update and destruction of a window.
+*   It will be able to configure the settings of the window
+*
+*************************************************/
+
 namespace taengine {
 
 // Public flags to create the window
