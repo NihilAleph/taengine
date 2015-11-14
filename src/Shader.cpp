@@ -130,7 +130,7 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
 void Shader::bindAttributes()
 {
     // Bind attribute position to index 0
-    glBindAttribLocation(m_programID, 0, "position");
+//    glBindAttribLocation(m_programID, 0, "position");
 }
 
 //void Shader::updateUniforms(const Transform& transform, const Camera& camera)
@@ -143,6 +143,11 @@ void Shader::updateUniforms(const Transform& transform)
     // Get uniform location
     GLuint mvp = glGetUniformLocation(m_programID, "MVP");
 
+    // Check if uniform exists
+    if (mvp == 0xFFFFFFFF) {
+        std::cerr << "Uniform MVP not found" << std::endl;
+    }
+
     // Update uniform value
     glUniformMatrix4fv(mvp, 1, GL_FALSE, &model[0][0]);
 
@@ -152,15 +157,11 @@ void Shader::bind()
 {
     // Set this shader to render
     glUseProgram(m_programID);
-    // Enable Position attribute
-    glEnableVertexAttribArray(0);
 
 }
 
 void Shader::unbind()
 {
-    // Disable Position attribute
-    glDisableVertexAttribArray(0);
     // Unbind gpu shader
     glUseProgram(0);
 }

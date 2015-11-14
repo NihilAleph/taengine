@@ -16,7 +16,7 @@ struct Vertex
 class Mesh
 {
     public:
-        Mesh(Vertex* vertices, unsigned int numVertices);
+        Mesh(Vertex* vertices, unsigned int *indices, unsigned int numIndices);
         virtual ~Mesh();
 
         void draw();
@@ -27,8 +27,10 @@ class Mesh
         GLuint m_vaoID;
         // Vertex Buffer ID
         GLuint m_vboID;
+        // Index Buffer ID
+        GLuint m_iboID;
         // Number of vertices applied to mesh
-        unsigned int m_numVertices = 0;
+        unsigned int m_numIndices = 0;
 };
 
 }
