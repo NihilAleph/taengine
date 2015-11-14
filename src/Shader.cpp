@@ -134,22 +134,22 @@ void Shader::bindAttributes()
 }
 
 //void Shader::updateUniforms(const Transform& transform, const Camera& camera)
-void Shader::updateUniforms(const Transform& transform)
+void Shader::updateUniforms(const Transform& transform, const Camera& camera)
 {
     // Get transform and camera matrix
     //glm::mat4 MVP = transform.getMVP(camera);
-    glm::mat4 model = transform.getModel();
+    glm::mat4 MVP = camera.getProjection() * transform.getModel();
 
     // Get uniform location
-    GLuint mvp = glGetUniformLocation(m_programID, "MVP");
+    GLuint mvpUniform = glGetUniformLocation(m_programID, "MVP");
 
     // Check if uniform exists
-    if (mvp == 0xFFFFFFFF) {
+    if (mvpUniform == 0xFFFFFFFF) {
         std::cerr << "Uniform MVP not found" << std::endl;
     }
 
     // Update uniform value
-    glUniformMatrix4fv(mvp, 1, GL_FALSE, &model[0][0]);
+    glUniformMatrix4fv(mvpUniform, 1, GL_FALSE, &MVP[0][0]);
 
 }
 
