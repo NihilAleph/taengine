@@ -74,7 +74,7 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
         // Variable to hold the code
         std::string code = "";
         std::string line = "";
-        // While file still have line append to code variable
+        // While file still has line append to code variable
         while (fileStream.good()) {
             getline(fileStream,line);
             code += "\n" + line;

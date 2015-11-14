@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 #include <GL/glew.h>
+#include <string>
+#include <vector>
 
 namespace taengine {
 
@@ -16,7 +18,10 @@ struct Vertex
 class Mesh
 {
     public:
-        Mesh(Vertex* vertices, unsigned int *indices, unsigned int numIndices);
+        // Create mesh by loading obj file
+        Mesh(std::string objFileName);
+        // Create mesh by vertices and indices vector
+        Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
         virtual ~Mesh();
 
         void draw();
@@ -31,6 +36,10 @@ class Mesh
         GLuint m_iboID;
         // Number of vertices applied to mesh
         unsigned int m_numIndices = 0;
+
+        // Initialize mesh with vertices and indices vector
+        void initMesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+
 };
 
 }
