@@ -10,10 +10,20 @@ class Camera
 {
     public:
         // Constructor for perspective projection
-        Camera(const glm::vec3& position, float fieldOfView, float aspectRation, float zNear, float zFar);
+        Camera(const glm::vec3& position,  const glm::vec3& forward, const glm::vec3 up,
+                float fieldOfView, float aspectRation, float zNear, float zFar);
         virtual ~Camera();
 
         glm::mat4 getProjection() const;
+
+        void move(const glm::vec3& delta);
+        void moveForward(float delta);
+        void moveRight(float delta);
+
+        void rotateX(float angle);
+        void rotateY(float angle);
+
+        void lookAt(const glm::vec3& target);
     protected:
     private:
 
