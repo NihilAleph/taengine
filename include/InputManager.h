@@ -19,10 +19,10 @@ class InputManager
         void releaseKey(unsigned int keyID);
 
         // Input verification
-        bool isKeyUp(unsigned int keyID);
-        bool isKeyDown(unsigned int keyID);
-        bool isKeyPressed(unsigned int keyID);
-        bool isKeyReleased(unsigned int keyID);
+        bool isKeyUp(unsigned int keyID) const;
+        bool isKeyDown(unsigned int keyID) const;
+        bool isKeyPressed(unsigned int keyID) const;
+        bool isKeyReleased(unsigned int keyID) const;
 
         // Set mouse coordinates
         void setMouseCoords(float x, float y);
@@ -39,8 +39,8 @@ class InputManager
         glm::vec2 m_mouseCoords;
 
         // Previous keys check
-        bool wasKeyUp(unsigned int keyID);
-        bool wasKeyDown(unsigned int keyID);
+        bool wasKeyUp(unsigned int keyID) const;
+        bool wasKeyDown(unsigned int keyID) const;
 };
 }
 

@@ -27,13 +27,13 @@ Texture::~Texture()
     glDeleteTextures(1, &m_id);
 }
 
-void Texture::bind()
+void Texture::bind() const
 {
     // Bind this texture to gpu
     glBindTexture(GL_TEXTURE_2D, m_id);
 }
 
-void Texture::unbind()
+void Texture::unbind() const
 {
     // Unbind texture
     glBindTexture(GL_TEXTURE_2D, 0);

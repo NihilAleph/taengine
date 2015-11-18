@@ -17,7 +17,7 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
         m_programID = glCreateProgram();
 
         // Bind attributes to program
-        bindAttributes();
+//        bindAttributes();
 
         // Link shaders to program
         glAttachShader(m_programID, vertexShaderID);
@@ -128,45 +128,112 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
 
 }
 
-void Shader::bindAttributes()
-{
-    // Bind attribute position to index 0
-//    glBindAttribLocation(m_programID, 0, "position");
-}
+//void Shader::bindAttributes()
+//{
+//    // Bind attribute position to index 0
+////    glBindAttribLocation(m_programID, 0, "position");
+//}
 
 //void Shader::updateUniforms(const Transform& transform, const Camera& camera)
-void Shader::updateUniforms(const Transform& transform, const Camera& camera)
+void Shader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
 {
     // Get transform and camera matrix
     //glm::mat4 MVP = transform.getMVP(camera);
     glm::mat4 MVP = camera.getProjection() * transform.getModel();
 
-    // Get uniform location
-    GLuint mvpUniform = glGetUniformLocation(m_programID, "MVP");
+    // Update uniform values
+    setUniform("MVP", MVP);
+    setUniform("color", material.getColor());
 
-    // Check if uniform exists
-    if (mvpUniform == 0xFFFFFFFF) {
-        std::cerr << "Uniform MVP not found" << std::endl;
-    }
-
-    // Update uniform value
-    glUniformMatrix4fv(mvpUniform, 1, GL_FALSE, &MVP[0][0]);
+    // Bind texture (if any)
+    material.bind();
+    // Should unbind... but when...?
 
 }
 
-void Shader::bind()
+void Shader::bind() const
 {
     // Set this shader to render
     glUseProgram(m_programID);
 
 }
 
-void Shader::unbind()
+void Shader::unbind() const
 {
     // Unbind gpu shader
     glUseProgram(0);
 }
 
+void Shader::addUniform(const std::string& name)
+{
+    GLuint uniformLocation = glGetUniformLocation(m_programID, name.c_str());
+
+    // Check if uniform exists
+    if (uniformLocation == 0xFFFFFFFF) {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    } else {
+
+        m_uniformMap[name] = uniformLocation;
+    }
+}
+
+
+void Shader::setUniform(const std::string& name, int value) const
+{
+    // Search for value in current state hash map
+    auto it = m_uniformMap.find(name);
+    // Verify if key exists in map and it's a
+    if (it != m_uniformMap.end()) {
+        glUniform1i(it->second, value);
+    } else {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    }
+
+}
+void Shader::setUniform(const std::string& name, float value) const
+{
+    // Search for value in current state hash map
+    auto it = m_uniformMap.find(name);
+    // Verify if key exists in map and it's a
+    if (it != m_uniformMap.end()) {
+        glUniform1f(it->second, value);
+    } else {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    }
+}
+void Shader::setUniform(const std::string& name, const glm::vec3& value) const
+{
+    // Search for value in current state hash map
+    auto it = m_uniformMap.find(name);
+    // Verify if key exists in map and it's a
+    if (it != m_uniformMap.end()) {
+        glUniform3fv(it->second, 1, &value[0]);
+    } else {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    }
+}
+void Shader::setUniform(const std::string& name, const glm::vec4& value) const
+{
+    // Search for value in current state hash map
+    auto it = m_uniformMap.find(name);
+    // Verify if key exists in map and it's a
+    if (it != m_uniformMap.end()) {
+        glUniform4fv(it->second, 1, &value[0]);
+    } else {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    }
+}
+void Shader::setUniform(const std::string& name, const glm::mat4& value) const
+{
+    // Search for value in current state hash map
+    auto it = m_uniformMap.find(name);
+    // Verify if key exists in map and it's a
+    if (it != m_uniformMap.end()) {
+        glUniformMatrix4fv(it->second, 1, GL_FALSE, &value[0][0]);
+    } else {
+        std::cerr << "Uniform " << name << " not found" << std::endl;
+    }
+}
 
 
 }

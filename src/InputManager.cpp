@@ -31,7 +31,7 @@ void InputManager::releaseKey(unsigned int keyID)
     m_keyMap[keyID] = false;
 }
 
-bool InputManager::isKeyUp(unsigned int keyID)
+bool InputManager::isKeyUp(unsigned int keyID) const
 {
     // Search for value of keyID in current state hash map
     auto it = m_keyMap.find(keyID);
@@ -41,7 +41,7 @@ bool InputManager::isKeyUp(unsigned int keyID)
     else return true;
 }
 
-bool InputManager::isKeyDown(unsigned int keyID)
+bool InputManager::isKeyDown(unsigned int keyID) const
 {
     // Search for value of keyID in current state hash map
     auto it = m_keyMap.find(keyID);
@@ -51,17 +51,17 @@ bool InputManager::isKeyDown(unsigned int keyID)
     else return false;
 }
 
-bool InputManager::isKeyPressed(unsigned int keyID)
+bool InputManager::isKeyPressed(unsigned int keyID) const
 {
     return wasKeyUp(keyID) && isKeyDown(keyID);
 }
 
-bool InputManager::isKeyReleased(unsigned int keyID)
+bool InputManager::isKeyReleased(unsigned int keyID) const
 {
     return isKeyUp(keyID) && wasKeyDown(keyID);
 }
 
-bool InputManager::wasKeyUp(unsigned int keyID)
+bool InputManager::wasKeyUp(unsigned int keyID) const
 {
     // Search for value of keyID in previous state hash map
     auto it = m_previousKeyMap.find(keyID);
@@ -71,7 +71,7 @@ bool InputManager::wasKeyUp(unsigned int keyID)
     else return true;
 }
 
-bool InputManager::wasKeyDown(unsigned int keyID)
+bool InputManager::wasKeyDown(unsigned int keyID) const
 {
     // Search for value of keyID in previous state hash map
     auto it = m_previousKeyMap.find(keyID);

@@ -10,8 +10,9 @@ class Texture
         Texture(const std::string& filePath);
         virtual ~Texture();
 
-        void bind();
-        void unbind();
+        // Bind and unbind texture to GPU
+        void bind() const;
+        void unbind() const;
     protected:
     private:
 

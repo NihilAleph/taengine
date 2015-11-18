@@ -26,7 +26,7 @@ class Mesh
         Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
         virtual ~Mesh();
 
-        void draw();
+        void draw() const;
     protected:
     private:
 

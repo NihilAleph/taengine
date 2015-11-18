@@ -99,7 +99,7 @@ Mesh::~Mesh()
     glDeleteVertexArrays(1, &m_vaoID);
 }
 
-void Mesh::draw()
+void Mesh::draw() const
 {
     // Bind mesh vertex array
     glBindVertexArray(m_vaoID);
