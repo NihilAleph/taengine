@@ -57,6 +57,7 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
 
 Shader::~Shader()
 {
+    // Delete shader from GPU
     glDeleteProgram(m_programID);
 }
 

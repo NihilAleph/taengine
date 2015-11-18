@@ -93,6 +93,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>&
 
 Mesh::~Mesh()
 {
+    // Delete buffers associated to this mesh from GPU
     glDeleteBuffers(1, &m_iboID);
     glDeleteBuffers(1, &m_vboID);
     glDeleteVertexArrays(1, &m_vaoID);
@@ -123,11 +124,15 @@ void Mesh::initMesh(const std::vector<Vertex>& vertices, const std::vector<unsig
     glGenBuffers(1, &m_vboID);
     glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 
-    // Enables attribute for position to be passed to vertex shader
+    // Enables attribute for position and uvCoord to be passed to vertex shader
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
 
     // Specifies the attribute pointer to position from vertex
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), offsetof(Vertex, position));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
+
+    // Specifies the attribute pointer to uvCoord from vertex
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uvCoord));
 
     // Send vertex data to GPU
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(taengine::Vertex), &vertices[0], GL_STATIC_DRAW);

@@ -39,7 +39,7 @@ void Camera::moveRight(float delta)
     m_position += right * delta;
 }
 
-void Camera::rotateX(float angle)
+void Camera::pitch(float angle)
 {
     glm::vec3 right = glm::cross(m_forward, m_up);
     m_forward = glm::vec3(glm::rotate(angle, right) * glm::vec4(m_forward,0.0f));

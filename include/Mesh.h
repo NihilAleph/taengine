@@ -12,7 +12,9 @@ namespace taengine {
 struct Vertex
 {
         glm::vec3 position;
-        Vertex(const glm::vec3& pos) : position(pos) {};
+        glm::vec2 uvCoord;
+        Vertex(const glm::vec3& pos) : position(pos), uvCoord(glm::vec2(0.0f,0.0f)) {};
+        Vertex(const glm::vec3& pos, const glm::vec2& uv) : position(pos), uvCoord(uv) {};
 };
 
 class Mesh

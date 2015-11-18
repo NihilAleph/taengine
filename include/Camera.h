@@ -20,7 +20,7 @@ class Camera
         void moveForward(float delta);
         void moveRight(float delta);
 
-        void rotateX(float angle);
+        void pitch(float angle);
         void rotateY(float angle);
 
         void lookAt(const glm::vec3& target);
