@@ -7,8 +7,10 @@ namespace taengine {
 class Texture
 {
     public:
-        Texture(const std::string& filePath);
+        Texture();
         virtual ~Texture();
+
+        void init(const std::string& filePath);
 
         // Bind and unbind texture to GPU
         void bind() const;

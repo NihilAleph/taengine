@@ -36,7 +36,7 @@ class InputManager
         std::unordered_map<unsigned int, bool> m_previousKeyMap;
 
         // Mouse coordinates
-        glm::vec2 m_mouseCoords;
+        glm::vec2 m_mouseCoords = glm::vec2(0.0f);
 
         // Previous keys check
         bool wasKeyUp(unsigned int keyID) const;

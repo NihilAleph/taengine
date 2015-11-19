@@ -3,18 +3,23 @@
 
 namespace taengine {
 
-Camera::Camera(const glm::vec3& position,  const glm::vec3& forward, const glm::vec3 up,
-                float fieldOfView, float aspectRation, float zNear, float zFar)
+Camera::Camera()
 {
-    m_position = position;
-    m_forward = glm::normalize(forward);
-    m_up = glm::normalize(up);
-    m_projection = glm::perspective(fieldOfView, aspectRation, zNear, zFar);
 }
 
 Camera::~Camera()
 {
     //dtor
+}
+
+void Camera::init(const glm::vec3& position,  const glm::vec3& forward, const glm::vec3 up,
+                float fieldOfView, float aspectRation, float zNear, float zFar)
+{
+
+    m_position = position;
+    m_forward = glm::normalize(forward);
+    m_up = glm::normalize(up);
+    m_projection = glm::perspective(fieldOfView, aspectRation, zNear, zFar);
 }
 
 glm::mat4 Camera::getProjection() const

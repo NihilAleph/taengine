@@ -2,30 +2,32 @@
 
 namespace taengine {
 
-Material::Material(const std::string& filePath, const glm::vec4& color)
+Material::Material()
 {
-    if (!filePath.empty()) {
-        m_texture = new Texture(filePath);
-    }
 
-    m_color = color;
 }
 
 Material::~Material()
 {
-    delete m_texture;
+
+}
+
+void Material::init(const std::string& filePath, const glm::vec3& color)
+{
+
+    m_texture.init(filePath);
+
+    m_color = color;
 }
 
 void Material::bind() const
 {
-    if (m_texture != nullptr)
-        m_texture->bind();
+    m_texture.bind();
 }
 
 void Material::unbind() const
 {
-    if (m_texture != nullptr)
-        m_texture->unbind();
+    m_texture.unbind();
 }
 
 }

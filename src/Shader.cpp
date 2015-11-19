@@ -5,7 +5,17 @@
 
 namespace taengine {
 
-Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+Shader::Shader()
+{
+}
+
+Shader::~Shader()
+{
+    // Delete shader from GPU
+    glDeleteProgram(m_programID);
+}
+
+void Shader::init(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
 {
     // Create shaders ID
     GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -15,9 +25,6 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
     if (loadShader(vertexShaderID, vertexShaderPath) && loadShader(fragmentShaderID, fragmentShaderPath)) {
         // Create program object
         m_programID = glCreateProgram();
-
-        // Bind attributes to program
-//        bindAttributes();
 
         // Link shaders to program
         glAttachShader(m_programID, vertexShaderID);
@@ -53,12 +60,9 @@ Shader::Shader(const std::string& vertexShaderPath, const std::string& fragmentS
         glDeleteShader(vertexShaderID);
         glDeleteShader(fragmentShaderID);
     }
-}
 
-Shader::~Shader()
-{
-    // Delete shader from GPU
-    glDeleteProgram(m_programID);
+    // Call the function that add uniforms to be used by the shader accordingly to implementation (overridden)
+    addUniforms();
 }
 
 bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
@@ -128,12 +132,6 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
 
 }
 
-//void Shader::bindAttributes()
-//{
-//    // Bind attribute position to index 0
-////    glBindAttribLocation(m_programID, 0, "position");
-//}
-
 //void Shader::updateUniforms(const Transform& transform, const Camera& camera)
 void Shader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
 {
@@ -147,7 +145,6 @@ void Shader::updateUniforms(const Transform& transform, const Camera& camera, co
 
     // Bind texture (if any)
     material.bind();
-    // Should unbind... but when...?
 
 }
 
@@ -162,6 +159,15 @@ void Shader::unbind() const
 {
     // Unbind gpu shader
     glUseProgram(0);
+
+    // Unbind textures
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Shader::addUniforms()
+{
+    addUniform("MVP");
+    addUniform("color");
 }
 
 void Shader::addUniform(const std::string& name)
@@ -170,7 +176,7 @@ void Shader::addUniform(const std::string& name)
 
     // Check if uniform exists
     if (uniformLocation == 0xFFFFFFFF) {
-        std::cerr << "Uniform " << name << " not found" << std::endl;
+        std::cerr << "Uniform " << name << " could not be added!" << std::endl;
     } else {
 
         m_uniformMap[name] = uniformLocation;

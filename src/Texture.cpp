@@ -4,7 +4,19 @@
 
 namespace taengine {
 
-Texture::Texture(const std::string& filePath)
+Texture::Texture()
+{
+
+}
+
+Texture::~Texture()
+{
+    // Delete texture from GPU
+    glDeleteTextures(1, &m_id);
+}
+
+
+void Texture::init(const std::string& filePath)
 {
     // Load an image file directly as a new OpenGL texture through SOIL library
     m_id = SOIL_load_OGL_texture
@@ -19,12 +31,6 @@ Texture::Texture(const std::string& filePath)
     if (m_id == 0) {
         std::cerr << "Unable to load texture " << filePath << std::endl;
     }
-}
-
-Texture::~Texture()
-{
-    // Delete texture from GPU
-    glDeleteTextures(1, &m_id);
 }
 
 void Texture::bind() const

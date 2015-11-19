@@ -19,8 +19,10 @@ enum WindowFlag { INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4 };
 class Window
 {
     public:
-        Window(std::string title, int width, int height, unsigned int currentFlags = 0x0);
+        Window();
         virtual ~Window();
+
+        void init(std::string title, int width, int height, unsigned int currentFlags = 0x0);
 
         // Clears the window content and fill with color
         void clear(float red, float blue, float green, float alpha);

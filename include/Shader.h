@@ -13,30 +13,21 @@ namespace taengine {
 class Shader
 {
     public:
-        Shader(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
+        Shader();
         virtual ~Shader();
+
+        void init(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
 
         // Updates uniforms of the shader. Must be overridden if Shader demands other uniforms
         // This shader only use the uniform MVP for transform
         virtual void updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const;
-
-        // Draw vetices. Must be overridden if shader demands other attributes
-        // virtual void draw();
 
         // Bind everything necessary to render using this Shader
         void bind() const;
         // Unbind this shader to GPU so other shader can be used
         void unbind() const;
 
-        // Add uniform to map
-        void addUniform(const std::string& name);
 
-        // Generic update functions for uniforms
-        void setUniform(const std::string& name, int value) const;
-        void setUniform(const std::string& name, float value) const;
-        void setUniform(const std::string& name, const glm::vec3& value) const;
-        void setUniform(const std::string& name, const glm::vec4& value) const;
-        void setUniform(const std::string& name, const glm::mat4& value) const;
 
     protected:
         GLuint m_programID;
@@ -46,6 +37,17 @@ class Shader
 
         // Load shader from file to specified ID
         bool loadShader(const GLuint shaderID, const std::string& filePath);
+        // Add all uniforms to be used by the shader
+        virtual void addUniforms();
+        // Add uniform to map
+        void addUniform(const std::string& name);
+
+        // Generic update functions for uniforms
+        void setUniform(const std::string& name, int value) const;
+        void setUniform(const std::string& name, float value) const;
+        void setUniform(const std::string& name, const glm::vec3& value) const;
+        void setUniform(const std::string& name, const glm::vec4& value) const;
+        void setUniform(const std::string& name, const glm::mat4& value) const;
 
     private:
 

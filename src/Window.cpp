@@ -3,7 +3,25 @@
 #include <iostream>
 
 namespace taengine {
-Window::Window(std::string title, int width, int height, unsigned int currentFlags)
+
+Window::Window()
+{
+
+}
+
+Window::~Window()
+{
+    // Destroy the openGL context
+    SDL_GL_DeleteContext(m_glContext);
+
+    // Destroy the SDL window
+    SDL_DestroyWindow(m_window);
+
+    // Quit SDL subsystems
+    SDL_Quit();
+}
+
+void Window::init(std::string title, int width, int height, unsigned int currentFlags)
 {
     // Initialize window dimensions
     m_width = width;
@@ -81,18 +99,6 @@ Window::Window(std::string title, int width, int height, unsigned int currentFla
 //   // enable alpha blending
 //   glEnable(GL_BLEND);
 //   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-
-Window::~Window()
-{
-    // Destroy the openGL context
-    SDL_GL_DeleteContext(m_glContext);
-
-    // Destroy the SDL window
-    SDL_DestroyWindow(m_window);
-
-    // Quit SDL subsystems
-    SDL_Quit();
 }
 
 void Window::clear(float red, float blue, float green, float alpha)
