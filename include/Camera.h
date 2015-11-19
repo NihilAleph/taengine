@@ -26,6 +26,8 @@ class Camera
         void rotateY(float angle);
 
         void lookAt(const glm::vec3& target);
+
+        inline glm::vec3 getPosition() const { return m_position; };
     protected:
     private:
 

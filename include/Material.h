@@ -12,18 +12,26 @@ class Material
         Material();
         virtual ~Material();
 
-        void init(const std::string& filePath, const glm::vec3& color = glm::vec3(1.0f));
+        void init(const std::string& filePath, const glm::vec3& color = glm::vec3(1.0f),
+                  float specularIntensity = 2.0f, float specularExponent = 32.0f);
 
         // Bind and unbind texture
         void bind() const;
         void unbind() const;
 
         inline glm::vec3 getColor() const { return m_color; }
+        inline float getSpecularIntensity() const { return m_specularIntensity; }
+        inline float getSpecularExponent() const { return m_specularExponent; }
     protected:
     private:
         // Not ideal, stil thinking how should I do this
         Texture m_texture;
         glm::vec3 m_color;
+
+        // Reflection intensity
+        float m_specularIntensity;
+        // Reflection spreading
+        float m_specularExponent;
 };
 
 }

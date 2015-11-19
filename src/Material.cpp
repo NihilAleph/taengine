@@ -12,12 +12,15 @@ Material::~Material()
 
 }
 
-void Material::init(const std::string& filePath, const glm::vec3& color)
+void Material::init(const std::string& filePath, const glm::vec3& color,
+                    float specularIntensity, float specularExponent)
 {
 
     m_texture.init(filePath);
 
     m_color = color;
+    m_specularIntensity = specularIntensity;
+    m_specularExponent = specularExponent;
 }
 
 void Material::bind() const

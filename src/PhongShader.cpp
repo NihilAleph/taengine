@@ -21,6 +21,9 @@ void PhongShader::addUniforms()
     addUniform("directionalLight.baseLight.color");
     addUniform("directionalLight.baseLight.intensity");
     addUniform("directionalLight.direction");
+    addUniform("specularIntensity");
+    addUniform("specularExponent");
+    addUniform("eyePosition");
 }
 
 void PhongShader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
@@ -38,6 +41,9 @@ void PhongShader::updateUniforms(const Transform& transform, const Camera& camer
     setUniform("directionalLight.baseLight.color", m_directionalLight.baseLight.color);
     setUniform("directionalLight.baseLight.intensity", m_directionalLight.baseLight.intensity);
     setUniform("directionalLight.direction", m_directionalLight.direction);
+    setUniform("specularIntensity", material.getSpecularIntensity());
+    setUniform("specularExponent", material.getSpecularExponent());
+    setUniform("eyePosition", camera.getPosition());
 
     // Bind texture (if any)
     material.bind();
