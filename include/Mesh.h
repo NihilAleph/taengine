@@ -13,8 +13,10 @@ struct Vertex
 {
         glm::vec3 position;
         glm::vec2 uvCoord;
-        Vertex(const glm::vec3& pos) : position(pos), uvCoord(glm::vec2(0.0f)) {};
-        Vertex(const glm::vec3& pos, const glm::vec2& uv) : position(pos), uvCoord(uv) {};
+        glm::vec3 normal;
+        Vertex(const glm::vec3& pos) : position(pos), uvCoord(glm::vec2(0.0f)), normal(glm::vec3(0.0f)) {};
+        Vertex(const glm::vec3& pos, const glm::vec2& uv) : position(pos), uvCoord(uv), normal(glm::vec3(0.0f)) {};
+        Vertex(const glm::vec3& pos, const glm::vec2& uv, const glm::vec3& n) : position(pos), uvCoord(uv), normal(n) {};
 };
 
 class Mesh
@@ -26,9 +28,12 @@ class Mesh
         // Init mesh by loading obj file
         void init(const std::string& objFilePath);
         // Init mesh by vertices and indices vector
-        void init (const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        void init (std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
 
         void draw() const;
+
+        // Calculate vertex normals given their faces
+        void calculateNormals(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
     protected:
     private:
 

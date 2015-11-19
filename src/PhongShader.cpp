@@ -15,8 +15,12 @@ PhongShader::~PhongShader()
 void PhongShader::addUniforms()
 {
     addUniform("MVP");
+    addUniform("transform");
     addUniform("baseColor");
     addUniform("ambientLight");
+    addUniform("directionalLight.baseLight.color");
+    addUniform("directionalLight.baseLight.intensity");
+    addUniform("directionalLight.direction");
 }
 
 void PhongShader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
@@ -28,8 +32,12 @@ void PhongShader::updateUniforms(const Transform& transform, const Camera& camer
 
     // Update uniform values
     setUniform("MVP", MVP);
+    setUniform("transform", transform.getModel());
     setUniform("baseColor", material.getColor());
     setUniform("ambientLight", m_ambientLight);
+    setUniform("directionalLight.baseLight.color", m_directionalLight.baseLight.color);
+    setUniform("directionalLight.baseLight.intensity", m_directionalLight.baseLight.intensity);
+    setUniform("directionalLight.direction", m_directionalLight.direction);
 
     // Bind texture (if any)
     material.bind();
@@ -43,6 +51,21 @@ void PhongShader::setAmbientLight(const glm::vec3& ambientLight)
 glm::vec3 PhongShader::getAmbientLight()
 {
     return m_ambientLight;
+}
+
+void PhongShader::setDirectionalLight(const DirectionalLight& directionalLight)
+{
+    m_directionalLight = directionalLight;
+}
+
+void PhongShader::setDirectionalLight(const glm::vec3& color, float intensity, const glm::vec3& direction)
+{
+    m_directionalLight.init(color, intensity, direction);
+}
+
+DirectionalLight PhongShader::getDirectionalLight()
+{
+    return m_directionalLight;
 }
 
 }
