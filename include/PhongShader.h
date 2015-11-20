@@ -45,12 +45,14 @@ struct PointLight
     } attenuation;
     BaseLight baseLight;
     glm::vec3 position;
+    float range;
 
-    void init(float constant, float linear, float exponent, const glm::vec3 color, float intensity, const glm::vec3 position)
+    void init(float constant, float linear, float exponent, const glm::vec3 color, float intensity, const glm::vec3 position, float range)
     {
         attenuation.init(constant, linear, exponent);
         baseLight.init(color, intensity);
         this->position = position;
+        this->range = range;
     }
 };
 

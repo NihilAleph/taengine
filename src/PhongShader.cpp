@@ -41,6 +41,7 @@ void PhongShader::addUniforms()
         addUniform("pointLights[" + std::to_string(i) + "].attenuation.linear");
         addUniform("pointLights[" + std::to_string(i) + "].attenuation.exponent");
         addUniform("pointLights[" + std::to_string(i) + "].position");
+        addUniform("pointLights[" + std::to_string(i) + "].range");
     }
 }
 
@@ -67,6 +68,7 @@ void PhongShader::updateUniforms(const Transform& transform, const Camera& camer
         setUniform("pointLights[" + std::to_string(i) + "].attenuation.linear", s_pointLights[i].attenuation.linear);
         setUniform("pointLights[" + std::to_string(i) + "].attenuation.exponent", s_pointLights[i].attenuation.exponent);
         setUniform("pointLights[" + std::to_string(i) + "].position", s_pointLights[i].position);
+        setUniform("pointLights[" + std::to_string(i) + "].range", s_pointLights[i].range);
     }
 
     setUniform("specularIntensity", material.getSpecularIntensity());
