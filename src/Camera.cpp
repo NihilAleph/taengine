@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include <iostream>
 
 namespace taengine {
 
@@ -47,8 +48,8 @@ void Camera::moveRight(float delta)
 void Camera::pitch(float angle)
 {
     glm::vec3 right = glm::cross(m_forward, m_up);
-    m_forward = glm::vec3(glm::rotate(angle, right) * glm::vec4(m_forward,0.0f));
-    m_up = glm::cross(right, m_forward);
+    m_forward = glm::normalize(glm::vec3(glm::rotate(angle, right) * glm::vec4(m_forward,0.0f)));
+    m_up = glm::normalize(glm::cross(right, m_forward));
 }
 
 void Camera::rotateY(float angle)
@@ -56,8 +57,8 @@ void Camera::rotateY(float angle)
     // Rotation axis is y
     glm::mat4 rotation = glm::rotate(angle, glm::vec3(0.0f,1.0f,0.0f));
 
-    m_forward = glm::vec3(rotation * glm::vec4(m_forward, 0.0f));
-    m_up = glm::vec3(rotation * glm::vec4(m_up,0.0f));
+    m_forward = glm::normalize(glm::vec3(rotation * glm::vec4(m_forward, 0.0f)));
+    m_up = glm::normalize(glm::vec3(rotation * glm::vec4(m_up,0.0f)));
 }
 
 void Camera::lookAt(const glm::vec3& target)
