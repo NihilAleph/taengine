@@ -28,7 +28,7 @@ class Mesh
         // Init mesh by loading obj file
         void init(const std::string& objFilePath);
         // Init mesh by vertices and indices vector
-        void init (std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+        void init (std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals = true);
 
         void draw() const;
 

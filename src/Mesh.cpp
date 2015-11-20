@@ -100,11 +100,13 @@ void Mesh::init(const std::string& objFilePath)
 
 
 
-void Mesh::init(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices)
+void Mesh::init(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals)
 
 {
     // Calculate Normals
-    calculateNormals(vertices, indices);
+    if (!hasNormals)
+        calculateNormals(vertices, indices);
+
     // Retain number of vertices
     initMesh(vertices, indices);
 
@@ -194,8 +196,7 @@ void Mesh::calculateNormals(std::vector<Vertex>& vertices, const std::vector<uns
         glm::vec3 v1 = vertices[i1].position - vertices[i0].position;
         glm::vec3 v2 = vertices[i2].position - vertices[i0].position;
 
-        // Cross product must be backwards so normal be in the right directions
-        glm::vec3 normal = glm::normalize(glm::cross(v2,v1));
+        glm::vec3 normal = glm::normalize(glm::cross(v1,v2));
 
         // Add normal to vertex
         vertices[i0].normal += normal;

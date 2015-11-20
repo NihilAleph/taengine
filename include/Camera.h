@@ -28,6 +28,7 @@ class Camera
         void lookAt(const glm::vec3& target);
 
         inline glm::vec3 getPosition() const { return m_position; };
+        inline glm::vec3 getForward() const { return m_forward; };
     protected:
     private:
 

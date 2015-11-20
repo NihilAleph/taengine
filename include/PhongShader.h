@@ -47,12 +47,29 @@ struct PointLight
     glm::vec3 position;
     float range;
 
-    void init(float constant, float linear, float exponent, const glm::vec3 color, float intensity, const glm::vec3 position, float range)
+    void init(float constant, float linear, float exponent, const glm::vec3& color, float intensity, const glm::vec3& position, float range)
     {
         attenuation.init(constant, linear, exponent);
         baseLight.init(color, intensity);
         this->position = position;
         this->range = range;
+    }
+};
+
+struct SpotLight
+{
+    PointLight pointLight;
+    glm::vec3 direction;
+    float cutOff;
+
+
+
+    void init(float constant, float linear, float exponent, const glm::vec3& color, float intensity, const glm::vec3& position, float range
+              , const glm::vec3& direction, float cutOff)
+    {
+        pointLight.init(constant, linear, exponent, color, intensity, position, range);
+        this->direction = direction;
+        this->cutOff = cutOff;
     }
 };
 
@@ -75,6 +92,9 @@ class PhongShader : public Shader
 
         static void setPointLights(const std::vector<PointLight>& pointLights);
         static std::vector<PointLight>& getPointLights();
+
+        static void setSpotLights(const std::vector<SpotLight>& spotLights);
+        static std::vector<SpotLight>& getSpotLights();
     protected:
         // Change the uniforms used in this shader
         void addUniforms() override;
@@ -84,8 +104,10 @@ class PhongShader : public Shader
         static glm::vec3 s_ambientLight;
         static DirectionalLight s_directionalLight;
         static std::vector<PointLight> s_pointLights;
+        static std::vector<SpotLight> s_spotLights;
 
         static const unsigned int MAX_POINT_LIGHTS;
+        static const unsigned int MAX_SPOT_LIGHTS;
 };
 
 }

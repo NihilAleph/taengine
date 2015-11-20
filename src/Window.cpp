@@ -92,8 +92,8 @@ void Window::init(std::string title, int width, int height, unsigned int current
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
-	// Set front face being clockwise
-	glFrontFace(GL_CW);
+	// Set front face being counterclockwise
+	glFrontFace(GL_CCW);
 
 
 //   // VSYNC is on (1) or off (0)

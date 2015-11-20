@@ -8,8 +8,10 @@ namespace taengine {
 glm::vec3 PhongShader::s_ambientLight;
 DirectionalLight PhongShader::s_directionalLight;
 std::vector<PointLight> PhongShader::s_pointLights;
+std::vector<SpotLight> PhongShader::s_spotLights;
 
 const unsigned int PhongShader::MAX_POINT_LIGHTS = 4;
+const unsigned int PhongShader::MAX_SPOT_LIGHTS = 4;
 
 PhongShader::PhongShader()
 {
@@ -43,6 +45,18 @@ void PhongShader::addUniforms()
         addUniform("pointLights[" + std::to_string(i) + "].position");
         addUniform("pointLights[" + std::to_string(i) + "].range");
     }
+
+    for (unsigned int i = 0; i < MAX_SPOT_LIGHTS; i++) {
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.baseLight.color");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.baseLight.intensity");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.constant");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.linear");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.exponent");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.position");
+        addUniform("spotLights[" + std::to_string(i) + "].pointLight.range");
+        addUniform("spotLights[" + std::to_string(i) + "].direction");
+        addUniform("spotLights[" + std::to_string(i) + "].cutOff");
+    }
 }
 
 void PhongShader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
@@ -69,6 +83,19 @@ void PhongShader::updateUniforms(const Transform& transform, const Camera& camer
         setUniform("pointLights[" + std::to_string(i) + "].attenuation.exponent", s_pointLights[i].attenuation.exponent);
         setUniform("pointLights[" + std::to_string(i) + "].position", s_pointLights[i].position);
         setUniform("pointLights[" + std::to_string(i) + "].range", s_pointLights[i].range);
+    }
+
+
+    for (unsigned int i = 0; i < s_spotLights.size(); i++) {
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.baseLight.color", s_spotLights[i].pointLight.baseLight.color);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.baseLight.intensity", s_spotLights[i].pointLight.baseLight.intensity);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.constant", s_spotLights[i].pointLight.attenuation.constant);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.linear", s_spotLights[i].pointLight.attenuation.linear);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.attenuation.exponent", s_spotLights[i].pointLight.attenuation.exponent);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.position", s_spotLights[i].pointLight.position);
+        setUniform("spotLights[" + std::to_string(i) + "].pointLight.range", s_spotLights[i].pointLight.range);
+        setUniform("spotLights[" + std::to_string(i) + "].direction", s_spotLights[i].direction);
+        setUniform("spotLights[" + std::to_string(i) + "].cutOff", s_spotLights[i].cutOff);
     }
 
     setUniform("specularIntensity", material.getSpecularIntensity());
@@ -115,6 +142,20 @@ void PhongShader::setPointLights(const std::vector<PointLight>& pointLights)
 std::vector<PointLight>& PhongShader::getPointLights()
 {
     return s_pointLights;
+}
+
+void PhongShader::setSpotLights(const std::vector<SpotLight>& spotLights)
+{
+    if (spotLights.size() > MAX_SPOT_LIGHTS) {
+        std::cerr << "Invalid number of Point Lights!";
+    } else {
+        s_spotLights = spotLights;
+    }
+}
+
+std::vector<SpotLight>& PhongShader::getSpotLights()
+{
+    return s_spotLights;
 }
 
 }
