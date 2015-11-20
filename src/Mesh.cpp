@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <cstdlib>
 
 namespace taengine {
 
@@ -72,16 +71,16 @@ void Mesh::init(const std::string& objFilePath)
                 {
                 // If first character of the line is v, then it's a vertex
                 case 'v':
-                    vertices.push_back(Vertex(glm::vec3(std::atof(lineVector[1].c_str()),
-                                                        std::atof(lineVector[2].c_str()),
-                                                        std::atof(lineVector[3].c_str()))));
+                    vertices.push_back(Vertex(glm::vec3(std::stof(lineVector[1]),
+                                                        std::stof(lineVector[2]),
+                                                        std::stof(lineVector[3]))));
                     break;
                 // If first character is a f, then it's a face
                 case 'f':
                     // Obj file format has indices starting from 1
-                    indices.push_back(std::atoi(lineVector[1].c_str()) - 1);
-                    indices.push_back(std::atoi(lineVector[2].c_str()) - 1);
-                    indices.push_back(std::atoi(lineVector[3].c_str()) - 1);
+                    indices.push_back(std::stoi(lineVector[1]) - 1);
+                    indices.push_back(std::stoi(lineVector[2]) - 1);
+                    indices.push_back(std::stoi(lineVector[3]) - 1);
                     break;
                 default:
                     break;

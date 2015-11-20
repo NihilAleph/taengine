@@ -85,12 +85,15 @@ void Window::init(std::string title, int width, int height, unsigned int current
 
     // Enable depth comparison for rendering
 	glEnable(GL_DEPTH_TEST);
-	// Specifying that should pass if vlue is less then stored
+	// Specifying that should pass if value is less then stored
 	glDepthFunc(GL_LESS);
 
     // Enable Back-face culling, i.e. polygons facing back are not rendered
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+
+	// Set front face being clockwise
+	glFrontFace(GL_CW);
 
 
 //   // VSYNC is on (1) or off (0)
