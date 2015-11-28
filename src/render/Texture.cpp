@@ -12,7 +12,7 @@ Texture::Texture()
 Texture::~Texture()
 {
     // Delete texture from GPU
-//    glDeleteTextures(1, &m_id);
+    glDeleteTextures(1, &m_id);
 }
 
 

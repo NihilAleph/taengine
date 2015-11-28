@@ -20,7 +20,7 @@ Shader::Shader()
 Shader::~Shader()
 {
     // Delete shader from GPU
-//    glDeleteProgram(m_programID);
+    glDeleteProgram(m_programID);
 }
 
 void Shader::init(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)

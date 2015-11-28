@@ -34,9 +34,9 @@ Mesh::Mesh()
 Mesh::~Mesh()
 {
     // Delete buffers associated to this mesh from GPU
-//    glDeleteBuffers(1, &m_iboID);
-//    glDeleteBuffers(1, &m_vboID);
-//    glDeleteVertexArrays(1, &m_vaoID);
+    glDeleteBuffers(1, &m_iboID);
+    glDeleteBuffers(1, &m_vboID);
+    glDeleteVertexArrays(1, &m_vaoID);
 }
 
 
