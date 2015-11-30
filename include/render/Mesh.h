@@ -22,13 +22,11 @@ struct Vertex
 class Mesh
 {
     public:
-        Mesh();
-        virtual ~Mesh();
-
         // Init mesh by loading obj file
-        void init(const std::string& objFilePath);
+        Mesh(const std::string& objFilePath);
         // Init mesh by vertices and indices vector
-        void init (std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals = true);
+        Mesh(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals = true);
+        virtual ~Mesh();
 
         void draw() const;
 

@@ -7,6 +7,7 @@
 #include "render/Camera.h"
 #include "render/Material.h"
 #include <unordered_map>
+#include "render/RenderingEngine.h"
 
 namespace taengine {
 
@@ -14,11 +15,10 @@ class Shader
 {
     public:
 
-        static Shader& getInstance();
-
         // Updates uniforms of the shader. Must be overridden if Shader demands other uniforms
         // This shader only use the uniform MVP for transform
-        virtual void updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const;
+        virtual void updateUniforms(const Transform& transform, const Camera& camera,
+                                    const Material& material, const RenderingEngine* renderingEngine) const = 0;
 
         // Bind everything necessary to render using this Shader
         void bind() const;

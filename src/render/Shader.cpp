@@ -5,16 +5,9 @@
 
 namespace taengine {
 
-Shader& Shader::getInstance()
-{
-    static Shader instance;
-
-    return instance;
-}
-
 Shader::Shader()
 {
-    init("res/basicShader.vs", "res/basicShader.fs");
+//    init("res/basicShader.vs", "res/basicShader.fs");
 }
 
 Shader::~Shader()
@@ -137,22 +130,6 @@ bool Shader::loadShader(const GLuint shaderID, const std::string& filePath)
     }
 
     return true;
-
-}
-
-//void Shader::updateUniforms(const Transform& transform, const Camera& camera)
-void Shader::updateUniforms(const Transform& transform, const Camera& camera, const Material& material) const
-{
-    // Get transform and camera matrix
-    //glm::mat4 MVP = transform.getMVP(camera);
-    glm::mat4 MVP = camera.getProjection() * transform.getModel();
-
-    // Update uniform values
-    setUniform("MVP", MVP);
-    setUniform("color", material.getColor());
-
-    // Bind texture (if any)
-    material.bind();
 
 }
 

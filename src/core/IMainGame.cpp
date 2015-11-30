@@ -21,8 +21,8 @@ void IMainGame::update(float deltaTime)
 {
     InputManager::update();
 
-    m_mainCamera.rotateY(- InputManager::getMouseRelativeCoords().x * 0.01f * deltaTime);
-    m_mainCamera.pitch(InputManager::getMouseRelativeCoords().y * 0.01f * deltaTime);
+    m_mainCamera.rotateY(- InputManager::getMouseRelativeCoords().x * 0.005f * deltaTime);
+    m_mainCamera.pitch(InputManager::getMouseRelativeCoords().y * 0.005f * deltaTime);
 
     glm::vec3 movement(0.0f);
 

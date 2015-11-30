@@ -9,11 +9,10 @@ namespace taengine {
 class Material
 {
     public:
-        Material();
+        Material(const std::string& filePath, const glm::vec3& color = glm::vec3(1.0f),
+                  float specularIntensity = 2.0f, float specularExponent = 32.0f);
         virtual ~Material();
 
-        void init(const std::string& filePath, const glm::vec3& color = glm::vec3(1.0f),
-                  float specularIntensity = 2.0f, float specularExponent = 32.0f);
 
         // Bind and unbind texture
         void bind() const;

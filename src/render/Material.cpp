@@ -2,17 +2,8 @@
 
 namespace taengine {
 
-Material::Material()
-{
 
-}
-
-Material::~Material()
-{
-
-}
-
-void Material::init(const std::string& filePath, const glm::vec3& color,
+Material::Material(const std::string& filePath, const glm::vec3& color,
                     float specularIntensity, float specularExponent)
 {
 
@@ -21,6 +12,11 @@ void Material::init(const std::string& filePath, const glm::vec3& color,
     m_color = color;
     m_specularIntensity = specularIntensity;
     m_specularExponent = specularExponent;
+}
+
+Material::~Material()
+{
+
 }
 
 void Material::bind() const

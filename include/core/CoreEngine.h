@@ -2,7 +2,7 @@
 #define COREENGINE_H
 
 #include "IMainGame.h"
-#include "RenderingEngine.h"
+#include "render/RenderingEngine.h"
 
 namespace taengine {
 

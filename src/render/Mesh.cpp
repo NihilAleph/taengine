@@ -24,23 +24,7 @@ static std::vector<std::string> split(const std::string &s, char delim) {
     return elems;
 }
 
-
-
-Mesh::Mesh()
-{
-
-}
-
-Mesh::~Mesh()
-{
-    // Delete buffers associated to this mesh from GPU
-    glDeleteBuffers(1, &m_iboID);
-    glDeleteBuffers(1, &m_vboID);
-    glDeleteVertexArrays(1, &m_vaoID);
-}
-
-
-void Mesh::init(const std::string& objFilePath)
+Mesh::Mesh(const std::string& objFilePath)
 {
 
     // Vertices and indices vector that will be populated by the file
@@ -100,7 +84,7 @@ void Mesh::init(const std::string& objFilePath)
 
 
 
-void Mesh::init(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals)
+Mesh::Mesh(std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, bool hasNormals)
 
 {
     // Calculate Normals
@@ -111,6 +95,15 @@ void Mesh::init(std::vector<Vertex>& vertices, const std::vector<unsigned int>& 
     initMesh(vertices, indices);
 
 
+}
+
+
+Mesh::~Mesh()
+{
+    // Delete buffers associated to this mesh from GPU
+    glDeleteBuffers(1, &m_iboID);
+    glDeleteBuffers(1, &m_vboID);
+    glDeleteVertexArrays(1, &m_vaoID);
 }
 
 void Mesh::draw() const

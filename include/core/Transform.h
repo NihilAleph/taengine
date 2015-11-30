@@ -18,15 +18,14 @@ namespace taengine {
 class Transform
 {
     public:
-        //Transform();
-        //virtual ~Transform();
-
-        inline void init(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3 scale)
+        Transform(const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& rotation = glm::vec3(0.0f), const glm::vec3 scale = glm::vec3(1.0f))
         {
+
             m_position = position;
             m_rotation = rotation;
             m_scale = scale;
-        }
+        };
+        virtual ~Transform() { }
 
         // Returns the model matrix of this transform
         inline glm::mat4 getModel() const

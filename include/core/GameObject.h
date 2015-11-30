@@ -2,6 +2,8 @@
 #define GAMEOBJECT_H
 
 #include "core/Transform.h"
+#include "render/Shader.h"
+#include "render/RenderingEngine.h"
 #include "core/GameComponent.h"
 #include <vector>
 
@@ -16,7 +18,10 @@ class GameObject
         void addChild(GameObject* child);
         void addComponent(GameComponent* component);
         void update(float deltaTime);
-        void draw(Shader& shader, const Camera& camera);
+        void draw(const Shader& shader, const Camera& camera, const RenderingEngine* renderingEngine);
+
+        void addToEngine(RenderingEngine* renderingEngine);
+
         Transform& getTransform() { return m_transform; }
     protected:
     private:
