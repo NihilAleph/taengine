@@ -11,7 +11,7 @@ Shader& ForwardAmbient::getInstance()
 ForwardAmbient::ForwardAmbient()
 {
     init("res/forward-ambient.vs", "res/forward-ambient.fs");
-    m_ambientLight = glm::vec3(0.1f);
+    m_ambientLight = glm::vec3(0.0f);
 }
 
 ForwardAmbient::~ForwardAmbient()

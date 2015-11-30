@@ -19,6 +19,7 @@ class GameComponent
         virtual void draw(const Shader& shader, const Camera& camera, const RenderingEngine* renderingEngine) {};
 
         void setParent(GameObject* parent) { m_parent = parent; }
+        GameObject* getParent() const { return m_parent; }
 
         virtual void addToEngine(RenderingEngine* renderingEngine) {};
     protected:
