@@ -17,6 +17,8 @@
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add directory="include" />
+					<Add directory="include/render" />
+					<Add directory="include/components" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -30,6 +32,8 @@
 					<Add option="-Wall" />
 					<Add option="-O2" />
 					<Add directory="include" />
+					<Add directory="include/render" />
+					<Add directory="include/components" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -49,27 +53,44 @@
 			<Add library="SOIL" />
 			<Add directory="../deps/x86/lib" />
 		</Linker>
-		<Unit filename="include/Camera.h" />
-		<Unit filename="include/IMainGame.h" />
-		<Unit filename="include/InputManager.h" />
-		<Unit filename="include/Material.h" />
-		<Unit filename="include/Mesh.h" />
-		<Unit filename="include/PhongShader.h" />
-		<Unit filename="include/Shader.h" />
-		<Unit filename="include/Texture.h" />
-		<Unit filename="include/Time.h" />
-		<Unit filename="include/Transform.h" />
-		<Unit filename="include/Window.h" />
-		<Unit filename="src/Camera.cpp" />
-		<Unit filename="src/IMainGame.cpp" />
-		<Unit filename="src/InputManager.cpp" />
-		<Unit filename="src/Material.cpp" />
-		<Unit filename="src/Mesh.cpp" />
-		<Unit filename="src/PhongShader.cpp" />
-		<Unit filename="src/Shader.cpp" />
-		<Unit filename="src/Texture.cpp" />
-		<Unit filename="src/Time.cpp" />
-		<Unit filename="src/Window.cpp" />
+		<Unit filename="include/components/BaseLight.h" />
+		<Unit filename="include/components/DirectionalLight.h" />
+		<Unit filename="include/components/MeshRenderer.h" />
+		<Unit filename="include/core/CoreEngine.h" />
+		<Unit filename="include/core/GameComponent.h" />
+		<Unit filename="include/core/GameObject.h" />
+		<Unit filename="include/core/IMainGame.h" />
+		<Unit filename="include/core/InputManager.h" />
+		<Unit filename="include/core/Time.h" />
+		<Unit filename="include/core/Transform.h" />
+		<Unit filename="include/render/Camera.h" />
+		<Unit filename="include/render/ForwardAmbient.h" />
+		<Unit filename="include/render/ForwardDirectional.h" />
+		<Unit filename="include/render/Material.h" />
+		<Unit filename="include/render/Mesh.h" />
+		<Unit filename="include/render/PhongShader.h" />
+		<Unit filename="include/render/RenderingEngine.h" />
+		<Unit filename="include/render/Shader.h" />
+		<Unit filename="include/render/Texture.h" />
+		<Unit filename="include/render/Window.h" />
+		<Unit filename="src/components/BaseLight.cpp" />
+		<Unit filename="src/components/DirectionalLight.cpp" />
+		<Unit filename="src/components/MeshRenderer.cpp" />
+		<Unit filename="src/core/CoreEngine.cpp" />
+		<Unit filename="src/core/GameObject.cpp" />
+		<Unit filename="src/core/IMainGame.cpp" />
+		<Unit filename="src/core/InputManager.cpp" />
+		<Unit filename="src/core/Time.cpp" />
+		<Unit filename="src/render/Camera.cpp" />
+		<Unit filename="src/render/ForwardAmbient.cpp" />
+		<Unit filename="src/render/ForwardDirectional.cpp" />
+		<Unit filename="src/render/Material.cpp" />
+		<Unit filename="src/render/Mesh.cpp" />
+		<Unit filename="src/render/PhongShader.cpp" />
+		<Unit filename="src/render/RenderingEngine.cpp" />
+		<Unit filename="src/render/Shader.cpp" />
+		<Unit filename="src/render/Texture.cpp" />
+		<Unit filename="src/render/Window.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
