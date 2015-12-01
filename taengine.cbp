@@ -56,6 +56,7 @@
 		<Unit filename="include/components/BaseLight.h" />
 		<Unit filename="include/components/DirectionalLight.h" />
 		<Unit filename="include/components/MeshRenderer.h" />
+		<Unit filename="include/components/PointLight.h" />
 		<Unit filename="include/core/CoreEngine.h" />
 		<Unit filename="include/core/GameComponent.h" />
 		<Unit filename="include/core/GameObject.h" />
@@ -66,6 +67,7 @@
 		<Unit filename="include/render/Camera.h" />
 		<Unit filename="include/render/ForwardAmbient.h" />
 		<Unit filename="include/render/ForwardDirectional.h" />
+		<Unit filename="include/render/ForwardPoint.h" />
 		<Unit filename="include/render/Material.h" />
 		<Unit filename="include/render/Mesh.h" />
 		<Unit filename="include/render/PhongShader.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="src/components/BaseLight.cpp" />
 		<Unit filename="src/components/DirectionalLight.cpp" />
 		<Unit filename="src/components/MeshRenderer.cpp" />
+		<Unit filename="src/components/PointLight.cpp" />
 		<Unit filename="src/core/CoreEngine.cpp" />
 		<Unit filename="src/core/GameObject.cpp" />
 		<Unit filename="src/core/IMainGame.cpp" />
@@ -84,6 +87,7 @@
 		<Unit filename="src/render/Camera.cpp" />
 		<Unit filename="src/render/ForwardAmbient.cpp" />
 		<Unit filename="src/render/ForwardDirectional.cpp" />
+		<Unit filename="src/render/ForwardPoint.cpp" />
 		<Unit filename="src/render/Material.cpp" />
 		<Unit filename="src/render/Mesh.cpp" />
 		<Unit filename="src/render/PhongShader.cpp" />
